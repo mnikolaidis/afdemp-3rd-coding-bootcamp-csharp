@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Movies list</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">ReleaseDateTime</th>
+            <th scope="col">Director</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Description</td>
+                <td>@movie.ReleaseDateTime.ToShortDateString()</td>
+                <td>@movie.Director</td>
+                <td>@movie.Genre</td>
+                <td>
+                    <a asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id">Edit</a>
+                    <a asp-controller="Movies" asp-action="Delete" asp-route-id="@movie.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

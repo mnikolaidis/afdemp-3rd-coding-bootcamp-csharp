@@ -1,0 +1,49 @@
+﻿@model Movie
+@{
+    ViewData["Title"] = "Edit movie";
+}
+<h2>Edit movie @Model.Title</h2>
+<form asp-action="Edit" method="post">
+    <div class="form-horizontal">
+        <hr />
+        @*<input type="hidden" value="@Model.Id" />*@
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ReleaseDateTime" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ReleaseDateTime" class="form-control" />
+                <span asp-validation-for="ReleaseDateTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Director" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Director" class="form-control" />
+                <span asp-validation-for="Director" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Genre" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Genre" class="form-control" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+        </div>
+        <input type="submit" value="Save changes" />
+    </div>
+</form>
+
