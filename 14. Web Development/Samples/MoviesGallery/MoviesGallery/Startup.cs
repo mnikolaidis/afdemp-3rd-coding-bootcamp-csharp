@@ -52,7 +52,7 @@ namespace MoviesGallery
             app.UseStaticFiles();
 
             //Generate EF Core Seed Data
-            dbInitializer.Initialize();
+            // dbInitializer.Initialize();
 
             app.UseMvc(routes =>
             {
