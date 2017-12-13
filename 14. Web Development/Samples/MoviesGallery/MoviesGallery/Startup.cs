@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MoviesGallery.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MoviesGallery
 {
@@ -22,10 +24,20 @@ namespace MoviesGallery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<MoviesGalleryContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
+
+            // Add Database Initializer
+            services.AddScoped<IDbInitializer, DbInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                              IHostingEnvironment env, 
+                              IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -38,6 +50,9 @@ namespace MoviesGallery
             }
 
             app.UseStaticFiles();
+
+            //Generate EF Core Seed Data
+            dbInitializer.Initialize();
 
             app.UseMvc(routes =>
             {
